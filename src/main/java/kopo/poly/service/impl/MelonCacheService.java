@@ -3,7 +3,6 @@ package kopo.poly.service.impl;
 import kopo.poly.dto.MelonDTO;
 import kopo.poly.persistance.mongodb.IMelonMapper;
 import kopo.poly.service.IMelonCacheService;
-import kopo.poly.service.IMelonService;
 import kopo.poly.util.CmmUtil;
 import kopo.poly.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service("MelonCacheService")
@@ -101,13 +99,13 @@ public class MelonCacheService implements IMelonCacheService {
     }
 
     @Override
-    public List<Map<String, Object>> getSingerSongCnt() throws Exception {
+    public List<MelonDTO> getSingerSongCnt() throws Exception {
 
         log.info(this.getClass().getName() + ".getSingerSongCnt Start!");
 
         String colNm = "MELON_" + DateUtil.getDateTime("yyyyMMdd");
 
-        List<Map<String, Object>> rList = melonMapper.getSingerSongCnt(colNm);
+        List<MelonDTO> rList = melonMapper.getSingerSongCnt(colNm);
 
         if (rList == null) {
             rList = new LinkedList<>();

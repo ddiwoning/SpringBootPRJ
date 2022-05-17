@@ -11,19 +11,8 @@ public abstract class AbstractMongoDBComon {
     @Autowired
     protected MongoTemplate mongodb;
 
-
-
     protected boolean createCollection(String colNm) {
-
-        boolean res;
-
-        if (mongodb.collectionExists(colNm)){
-            res = false;
-        }else{
-            mongodb.createCollection(colNm);
-            res = true;
-        }
-        return res;
+        return createCollection(colNm, "");
     }
 
     protected boolean createCollection(String colNm, String index)  {
@@ -70,6 +59,25 @@ public abstract class AbstractMongoDBComon {
 
         return res;
 
+    }
+    /**
+     * 컬렉션 삭제
+     *
+     * @param colNm 생성할 컬렉션명
+     * @return 삭제결과
+     */
+    protected boolean dropCollection(String colNm) {
+
+        boolean res = false;
+
+        if (mongodb.collectionExists(colNm)){
+            mongodb.dropCollection(colNm);
+            res = true;
+
+
+        }
+
+        return res;
     }
 
 }
